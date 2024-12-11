@@ -42,16 +42,25 @@ for i in range(num_c):
 ## get clusters
 for i in range(itera):
 
+	## get distances and label each point with the closest centroid
 	dist = distance(data, centroids)
 	logical =  np.argmax((dist == np.min(dist, axis=0, keepdims=True)).astype(int),axis = 0)
+
 
 	clstr = []
 	for idx,i in enumerate(np.unique(logical)):
 
+		## get index of centroid 
 		ind = [index for index, value in enumerate(logical) if value == i]
+
+		## get points
 		new_data = data[ind]
+
+		## update centroids
 		new_centroid = centroid(new_data)
 		centroids[idx,:] = new_centroid
+
+		## save cluster
 		clstr.append(new_data)
 
 
